@@ -1,5 +1,5 @@
 #ifndef person_h
-#define person_h
+#define person_h        
 
 #define NAME_LEN 20
 
