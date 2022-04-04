@@ -14,7 +14,7 @@
  * @remark strncmp() is used for producing the result of string field comparisons
  * @remark a->age – b->age is used for producing the result of age comparison
  */
-int person_compare(const person_t *a, const person_t *b){
+int person_compare(const person_t *a, const person_t *b) {
     int name_comparison = strcmp(a->name, b->name);
     if (name_comparison != 0) return name_comparison;
 
