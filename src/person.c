@@ -1,3 +1,7 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "person.h"
 
 /**
@@ -11,6 +15,11 @@
  * @remark a->age – b->age is used for producing the result of age comparison
  */
 int person_compare(const person_t *a, const person_t *b){
-    // TODO: implement
-    return 1;
+    int name_comparison = strcmp(a->name, b->name);
+    if (name_comparison != 0) return name_comparison;
+    int first_name_comparison = strcmp(a->first_name, b->first_name);
+    if (first_name_comparison != 0) return first_name_comparison;
+    int age_comparison = (a->age - b->age);
+    if (age_comparison != 0) return age_comparison;
+    return 0;
 }
