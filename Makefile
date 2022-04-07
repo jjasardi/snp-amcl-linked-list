@@ -41,6 +41,3 @@ test: $(TESTTARGET)
 $(TESTTARGET): $(FULLTARGET) $(TESTOBJECTS)
 	$(LINK.c) -o $(TESTTARGET) $(TESTOBJECTS) -lm -lcunit -L$(TESTLIBDIR) -lsnptest
 	@echo "#### $@ built ####"
-
-hello:
-	@echo $(FULLTARGET)
