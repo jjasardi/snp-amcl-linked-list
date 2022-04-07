@@ -4,7 +4,7 @@ TARGET := bin
 FULLTARGET := $(CURDIR)/$(TARGET)/linked-list
 
 TESTLIB := $(CURDIR)/testlib
-TESTSOURCES := tests/tests.c
+TESTSOURCES := tests/tests.c $(MODULES)
 TESTOBJECTS := $(TESTSOURCES:%.c=%.o)
 TESTDEPS := $(TESTSOURCES:%.c=%.d)
 TESTTARGET := $(CURDIR)/tests/runtest
