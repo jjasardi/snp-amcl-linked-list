@@ -1,15 +1,16 @@
 #include "person.h"
 #include <stdlib.h>
-
-person_t root_t;
-int rootPointer;
-node_t currentNode;
-int amountOfNodes = 0;
+#include <stdio.h>
 
 typedef struct node {
   person_t     content; // in diesem Knoten gespeicherte Person
   struct node *next;    // Pointer auf den nächsten Knoten in der Liste
 } node_t;
+
+person_t root_t;
+int rootPointer;
+node_t currentNode;
+int amountOfNodes = 0;
 
 void initialiseRoot(){
   node_t *rootPointer, rootNode;
