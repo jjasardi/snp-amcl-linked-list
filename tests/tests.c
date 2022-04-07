@@ -74,7 +74,7 @@ node_t* create_list(person_t person) {
 }
 
 int get_list_length(node_t* head) {
-  int length = 0;
+  int length = 1;
   node_t* current = head;
   while (current->next != head) {
     length++;
@@ -94,14 +94,12 @@ static void test_list_insert(void) {
   // arrange
   person_t person = {.name = "Doe", .first_name = "John", .age = 42};
   person_t person2 = {.name = "Doe", .first_name = "Jane", .age = 43};
-  person_t person3 = {.name = "Doe", .first_name = "Jack", .age = 44};
-  person_t person4 = {.name = "Doe", .first_name = "Jill", .age = 45};
   // act
   node_t* list = create_list(person);
   // assert
   CU_ASSERT_EQUAL(get_list_length(list), 1);
   comparePerson(&person, &list->content);
-  list_insert(person2, list, list);
+  list_insert(person2, list);
   CU_ASSERT_EQUAL(get_list_length(list), 2);
   comparePerson(&person, &list->content);
   comparePerson(&person2, &list->next->content);
