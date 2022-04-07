@@ -8,7 +8,7 @@ typedef struct node {
 } node_t;
 
 person_t root_t;
-int rootPointer;
+node_t *rootPointer;
 node_t currentNode;
 int amountOfNodes = 0;
 
@@ -22,8 +22,8 @@ void initialiseRoot(){
   amountOfNodes++;
 }
 
-int checkIfLastNode(int nodePointer){
-  if(nodePointer > amountOfNodes * (sizeof(node_t))){
+int checkIfLastNode(node_t *nodePointer){
+  if(nodePointer == rootPointer){
     return 1;
   } else {
     return 0;
@@ -45,7 +45,7 @@ void insert(person_t person) {
   nodePointer = &newNode;
   newNode.content = person;
 
-  if(checkIfEnoughMemory == 1) {
+  if(checkIfEnoughMemory() == 1) {
     if((checkIfLastNode(nodePointer) == 1)) {
       currentNode.next = rootPointer;
     } else {
