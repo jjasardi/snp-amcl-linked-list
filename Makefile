@@ -20,13 +20,13 @@ LDFLAGS = -static
 OBJECTS := $(SOURCES:%.c=%.o)
 DEPS := $(SOURCES:%.c=%.d)
 
-.PHONY: defaul mkdir clean
+.PHONY: default mkdir clean test
 
 default: $(FULLTARGET)
 	@echo "#### $< built ####"
 
 $(FULLTARGET): mkdir $(OBJECTS) Makefile
-	$(LINK.c) -o $@ $(OBJECTS)
+	$(LINK.c) -o $@ $(OBJECTS) -lm
 
 mkdir:
 	-mkdir -p $(TARGET)
@@ -41,3 +41,6 @@ test: $(TESTTARGET)
 $(TESTTARGET): $(FULLTARGET) $(TESTOBJECTS)
 	$(LINK.c) -o $(TESTTARGET) $(TESTOBJECTS) -lm -lcunit -L$(TESTLIBDIR) -lsnptest
 	@echo "#### $@ built ####"
+
+hello:
+	@echo $(FULLTARGET)
