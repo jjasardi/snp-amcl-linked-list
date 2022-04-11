@@ -1,5 +1,7 @@
 {
   "files.associations": {
-    "list.h": "c"
+    "list.h": "c",
+    "stdlib.h": "c",
+    "person.h": "c"
   }
 }
