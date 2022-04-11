@@ -3,4 +3,4 @@
 // list_remove()
 // list_clear()
 
-void list_clear(struct node_t *list);
+void list_clear(node_t *list);

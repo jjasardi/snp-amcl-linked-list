@@ -7,15 +7,15 @@ typedef struct node
   struct node *next; // Pointer auf den nächsten Knoten in der Liste
 } node_t;
 
-void list_clear(struct node_t *list)
+void list_clear(node_t *root)
 {
-  struct node_t *temp;
+  node_t *temp = root;
+  node_t *current = root->next;
 
-  while (temp != NULL)
+  while (current != root)
   {
-    temp = list;
-    list = list->next;
-
-    free(temp);
+    temp = current->next;
+    free(current);
+    current = temp;
   }
 }
