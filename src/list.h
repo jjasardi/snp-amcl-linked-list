@@ -9,9 +9,11 @@ typedef struct node {
   struct node *next;
 } node_t;
 
-void list_insert(person_t person, node_t *head, const node_t *root);
+void list_insert(person_t person, node_t *head);
 
 node_t *getNewNode(person_t person, node_t *next);
+
+node_t *newLinkedList();
 
 // list_remove()
 // list_clear()

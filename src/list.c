@@ -14,6 +14,12 @@ node_t *getNewNode(person_t person, node_t *next) {
   return newNode;
 }
 
+node_t *newLinkedList() {
+  node_t *head = malloc(sizeof(node_t));
+  head->next = head;
+  return head;
+}
+
 bool has_next(node_t *head, node_t *listStart) {
   return head->next != listStart;
 }
@@ -28,18 +34,14 @@ node_t *getLastNode(node_t *head) {
   return currentNode;
 }
 
-void list_insert(person_t person, node_t *head, node_t *root) {
-  if (head->next == head) {
-    node_t *newNode = getNewNode(person, head);
-    head->next = newNode;
+void list_insert(person_t person, node_t *head) {
+  if (person_compare(&person, &head->next->content) == 0) {
+    fprintf(stderr, "This record already exists in the list.\n");
     return;
   }
-
-  node_t *currentNode = head;
-  while (person_compare(&person, &head->content) > 0) {
-    currentNode = currentNode->next;
+  if (head->next == head || person_compare(&person, &head->next->content) < 0) {
+    head->next = getNewNode(person, head->next);
+  } else {
+    list_insert(person, head->next);
   }
-
-  node_t *newNode = getNewNode(person, currentNode->next);
-  currentNode->next = newNode;
 }
