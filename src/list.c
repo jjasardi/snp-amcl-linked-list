@@ -39,9 +39,12 @@ void list_insert(person_t person, node_t *head) {
     fprintf(stderr, "This record already exists in the list.\n");
     return;
   }
-  if (head->next == head || person_compare(&person, &head->next->content) < 0) {
-    head->next = getNewNode(person, head->next);
+  int personCompare = person_compare(&person, &head->content);
+  printf("%d\n", personCompare);
+  if (head->next == head || personCompare < 0) {
+    node_t *newNode = getNewNode(person, head->next);
+    head->next = newNode;
   } else {
-    list_insert(person, head->next);
+    return list_insert(person, head->next);
   }
 }

@@ -36,8 +36,8 @@ void printList(node_t *head, const node_t *root) {
 int main(int argc, char *argv[]) {
   // BEGIN-STUDENTS-TO-ADD-CODE
   person_t person = {.name = "Doe", .first_name = "John", .age = 43};
-  person_t person2 = {.name = "Heinz", .first_name = "Jane", .age = 42};
   person_t person3 = {.name = "Alabastatan", .first_name = "Jane", .age = 41};
+  person_t person2 = {.name = "Heinz", .first_name = "Jane", .age = 42};
   node_t *rootPointer = newLinkedList();
   printList(rootPointer, rootPointer);
   printf("First Insert\n");

@@ -77,6 +77,7 @@ int get_list_length(node_t* head) {
   int length = 1;
   node_t* current = head;
   while (current->next != head) {
+    printf("length: %d\n", length);
     length++;
     current = current->next;
   }
@@ -89,20 +90,40 @@ void comparePerson(person_t* expected, person_t* actual) {
   CU_ASSERT_EQUAL(expected->age, actual->age);
 }
 
+void printList(node_t* head) {
+  node_t* current = head;
+  while (current->next != head) {
+    printf("%s\n", current->content.name);
+    current = current->next;
+  }
+}
+
 static void test_list_insert(void) {
   // BEGIN-STUDENTS-TO-ADD-CODE
   // arrange
   person_t person = {.name = "Doe", .first_name = "John", .age = 42};
-  person_t person2 = {.name = "Doe", .first_name = "Jane", .age = 43};
+  person_t person2 = {.name = "Coe", .first_name = "Jane", .age = 43};
+  person_t person3 = {.name = "Alabastatan", .first_name = "Jane", .age = 43};
   // act
-  node_t* list = create_list(person);
+  node_t list = getNewNode(person, NULL);
+  list.next = &list;
   // assert
-  CU_ASSERT_EQUAL(get_list_length(list), 1);
-  comparePerson(&person, &list->content);
-  list_insert(person2, list);
-  CU_ASSERT_EQUAL(get_list_length(list), 2);
-  comparePerson(&person, &list->content);
-  comparePerson(&person2, &list->next->content);
+  CU_ASSERT_EQUAL(get_list_length(&list), 1);
+
+  printf("First Insert\n");
+  list_insert(person2, &list);
+  printf("After Insert: \n");
+  printList(&list);
+  CU_ASSERT_EQUAL(get_list_length(&list), 2);
+  comparePerson(&person2, &list.content);
+  comparePerson(&person, &list.next->content);
+
+  printf("Nachher\n");
+  list_insert(person3, &list);
+  CU_ASSERT_EQUAL(get_list_length(&list), 3);
+  comparePerson(&person3, &list.content);
+  comparePerson(&person2, &list.next->content);
+  comparePerson(&person, &list.next->next->content);
   // END-STUDENTS-TO-ADD-CODE
 }
 
