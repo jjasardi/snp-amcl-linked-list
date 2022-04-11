@@ -41,13 +41,13 @@ int main(int argc, char *argv[]) {
   node_t *rootPointer = newLinkedList();
   printList(rootPointer, rootPointer);
   printf("First Insert\n");
-  list_insert(person, rootPointer);
+  list_insert(person, rootPointer, NULL);
   printList(rootPointer, rootPointer);
   printf("Second Insert: \n");
-  list_insert(person2, rootPointer);
+  list_insert(person2, rootPointer, NULL);
   printList(rootPointer, rootPointer);
   printf("Third Insert: \n");
-  list_insert(person3, rootPointer);
+  list_insert(person3, rootPointer, NULL);
   printList(rootPointer, rootPointer);
   // END-STUDENTS-TO-ADD-CODE
   return EXIT_SUCCESS;

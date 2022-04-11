@@ -34,17 +34,20 @@ node_t *getLastNode(node_t *head) {
   return currentNode;
 }
 
-void list_insert(person_t person, node_t *head) {
-  if (person_compare(&person, &head->next->content) == 0) {
+void list_insert(person_t person, node_t *head, node_t *previous) {
+  if (person_compare(&person, &head->content) == 0) {
     fprintf(stderr, "This record already exists in the list.\n");
     return;
   }
-  int personCompare = person_compare(&person, &head->content);
-  printf("%d\n", personCompare);
-  if (head->next == head || personCompare < 0) {
+  int personCompare = strcmp(head->content.name, person.name);
+  printf("Name in List: %s\n", head->content.name);
+  printf("Name in struct: %s\n", person.name);
+  printf("Person Compare: %d\n", personCompare);
+  if ((personCompare <= 0 && strlen(head->content.name) > 0) ||
+      strlen(head->content.name) == 0) {
     node_t *newNode = getNewNode(person, head->next);
     head->next = newNode;
   } else {
-    return list_insert(person, head->next);
+    return list_insert(person, head->next, head);
   }
 }
