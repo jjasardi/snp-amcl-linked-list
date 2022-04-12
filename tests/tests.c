@@ -76,8 +76,7 @@ node_t* create_list(person_t person) {
 int get_list_length(node_t* head) {
   int length = 1;
   node_t* current = head;
-  while (current->next != head) {
-    printf("length: %d\n", length);
+  while (strlen(current->next->content.name) != 0) {
     length++;
     current = current->next;
   }
@@ -101,29 +100,30 @@ void printList(node_t* head) {
 static void test_list_insert(void) {
   // BEGIN-STUDENTS-TO-ADD-CODE
   // arrange
-  person_t person = {.name = "Doe", .first_name = "John", .age = 42};
-  person_t person2 = {.name = "Coe", .first_name = "Jane", .age = 43};
-  person_t person3 = {.name = "Alabastatan", .first_name = "Jane", .age = 43};
-  // act
-  node_t list = getNewNode(person, NULL);
-  list.next = &list;
-  // assert
-  CU_ASSERT_EQUAL(get_list_length(&list), 1);
+  person_t person = {.name = "Doe", .first_name = "John", .age = 43};
+  person_t person2 = {.name = "Alabastatan", .first_name = "Jane", .age = 41};
+  person_t person3 = {.name = "Heinz", .first_name = "Jane", .age = 42};
+  person_t person4 = {.name = "Alban", .first_name = "Jane", .age = 41};
+  person_t person5 = {.name = "Alban", .first_name = "Jane", .age = 42};
+  person_t person6 = {.name = "Alban", .first_name = "Jane", .age = 42};
+  person_t people[] = {person, person2, person3, person4, person5, person6};
+  person_t peopleAlphabetic[] = {person2, person4, person5, person, person3};
+  node_t* rootPointer = newLinkedList();
+  for (int i = 0; i < 5; i++) {
+    list_insert(people[i], rootPointer);
+  }
+  CU_ASSERT_EQUAL(get_list_length(rootPointer), 6);
+  node_t firstNode = *rootPointer->next;
+  node_t secondNode = *firstNode.next;
+  node_t thirdNode = *secondNode.next;
+  node_t fourthNode = *thirdNode.next;
+  node_t fifthNode = *fourthNode.next;
+  node_t sixthNode = *fifthNode.next;
+  node_t nodes[] = {firstNode, secondNode, thirdNode, fourthNode, fifthNode};
 
-  printf("First Insert\n");
-  list_insert(person2, &list);
-  printf("After Insert: \n");
-  printList(&list);
-  CU_ASSERT_EQUAL(get_list_length(&list), 2);
-  comparePerson(&person2, &list.content);
-  comparePerson(&person, &list.next->content);
-
-  printf("Nachher\n");
-  list_insert(person3, &list);
-  CU_ASSERT_EQUAL(get_list_length(&list), 3);
-  comparePerson(&person3, &list.content);
-  comparePerson(&person2, &list.next->content);
-  comparePerson(&person, &list.next->next->content);
+  for (int i = 0; i < 5; i++) {
+    comparePerson(&peopleAlphabetic[i], &nodes[i].content);
+  }
   // END-STUDENTS-TO-ADD-CODE
 }
 
