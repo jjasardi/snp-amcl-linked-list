@@ -48,6 +48,6 @@ void list_insert(person_t person, node_t *head) {
     node_t *newNode = getNewNode(person, head->next);
     head->next = newNode;
   } else {
-    return list_insert(person, head->next);
+    return list_insert(person, head->next, head);
   }
 }

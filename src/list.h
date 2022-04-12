@@ -9,7 +9,7 @@ typedef struct node {
   struct node *next;
 } node_t;
 
-void list_insert(person_t person, node_t *head);
+void list_insert(person_t person, node_t *head, node_t *previous);
 
 node_t *getNewNode(person_t person, node_t *next);
 
