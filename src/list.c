@@ -47,7 +47,7 @@ void list_insert(person_t person, node_t *head) {
   if (strlen(head->next->content.name) == 0 || personCompare < 0) {
     node_t *newNode = getNewNode(person, head->next);
     head->next = newNode;
-  } else {
-    return list_insert(person, head->next);
+    return;
   }
+  return list_insert(person, head->next);
 }
