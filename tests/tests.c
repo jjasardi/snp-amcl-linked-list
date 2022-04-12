@@ -106,6 +106,7 @@ static void test_list_insert(void) {
   person_t person4 = {.name = "Alban", .first_name = "Jane", .age = 41};
   person_t person5 = {.name = "Alban", .first_name = "Jane", .age = 42};
   person_t person6 = {.name = "Alban", .first_name = "Jane", .age = 42};
+  person_t emptyPerson = {.name = "", .first_name = "", .age = 0};
   person_t people[] = {person, person2, person3, person4, person5, person6};
   person_t peopleAlphabetic[] = {person2, person4, person5, person, person3};
   node_t* rootPointer = newLinkedList();
@@ -118,12 +119,13 @@ static void test_list_insert(void) {
   node_t thirdNode = *secondNode.next;
   node_t fourthNode = *thirdNode.next;
   node_t fifthNode = *fourthNode.next;
-  node_t sixthNode = *fifthNode.next;
   node_t nodes[] = {firstNode, secondNode, thirdNode, fourthNode, fifthNode};
 
   for (int i = 0; i < 5; i++) {
     comparePerson(&peopleAlphabetic[i], &nodes[i].content);
   }
+  list_insert(emptyPerson, rootPointer);
+  CU_ASSERT_EQUAL(get_list_length(rootPointer), 6);
   // END-STUDENTS-TO-ADD-CODE
 }
 
