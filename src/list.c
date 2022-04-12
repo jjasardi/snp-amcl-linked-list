@@ -35,6 +35,10 @@ node_t *getLastNode(node_t *head) {
 }
 
 void list_insert(person_t person, node_t *head) {
+  if (strlen(person.name) == 0 && strlen(person.first_name) == 0) {
+    fprintf(stderr, "Cannot insert empty person\n");
+    return;
+  }
   if (person_compare(&person, &head->next->content) == 0) {
     fprintf(stderr, "This record already exists in the list.\n");
     return;
