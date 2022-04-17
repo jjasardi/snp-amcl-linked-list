@@ -30,7 +30,6 @@ void compareNode(person_t person, node_t *rootPointer){
   char *firstName = person.first_name;
   char *secondName = person.name;
 
-  //node_t *rootPointer = &rootPointer;
   node_t *nextNodePointer = &rootPointer->next;
 
   int *searching = 1;
