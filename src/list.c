@@ -1,8 +1,8 @@
 #include "person.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
-#define MAX_NAME_LENGTH 20
 #define DUMMY_AGE 69
 
 typedef struct node {
@@ -12,17 +12,18 @@ typedef struct node {
 
 void askForName(){}
 
-void searchForMatch(person_t *person, node_t *nodePointer, node_t *rootPointer, int *searching){
-  node_t *nextNodePointer = &nodePointer->next;
-  if(&nodePointer == &rootPointer) {
+void searchForMatch(person_t *person, node_t *nodePointer, int *searching){
+  node_t *nextNodePointer = nodePointer->next;
+  if(strnlen(nodePointer->content.name, NAME_LEN) == 0) {
     printf("No Person found with this name!");
     *searching = 0;
   }
-  if(person_compare(&person, &nextNodePointer != 0)) {
-    nextNodePointer = &nextNodePointer->next;
+  if(person_compare(person, &nextNodePointer->content) != 0) {
+    nextNodePointer = nextNodePointer->next;
   } else {
     //brauche hier previous node um die zu vernetzen -> Datenfeld?
-    free(nodePointer);
+    nodePointer->next = nextNodePointer->next;
+    free(nextNodePointer);
   }
 }
 
@@ -30,23 +31,23 @@ void compareNode(person_t person, node_t *rootPointer){
   char *firstName = person.first_name;
   char *secondName = person.name;
 
-  node_t *nextNodePointer = &rootPointer->next;
+  node_t *nextNodePointer = rootPointer->next;
 
-  int *searching = 1;
+  int searching = 1;
 
   while (searching == 1){
-    searchForMatch(&person, &nextNodePointer, rootPointer, *searching);
+    searchForMatch(&person, nextNodePointer,&searching);
   }  
 }
 
 void list_remove(node_t *rootPointer) {
   printf("Please insert the first name of the person you want to remove: \n");
-  char firstName [MAX_NAME_LENGTH];
-  fgets(firstName, MAX_NAME_LENGTH, stdin);
+  char firstName [NAME_LEN];
+  fgets(firstName, NAME_LEN, stdin);
 
   printf("Please insert the second name of the person you want to remove: \n");
-  char secondName [MAX_NAME_LENGTH];
-  fgets(secondName, MAX_NAME_LENGTH, stdin);
+  char secondName [NAME_LEN];
+  fgets(secondName, NAME_LEN, stdin);
 
   person_t person = {secondName, firstName, DUMMY_AGE};
 
