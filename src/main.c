@@ -17,6 +17,8 @@
 
 #include "list.h"
 
+#define MAX_AGE 99
+
 /**
  * @brief Main entry point.
  * @param[in] argc  The size of the argv array.
@@ -25,7 +27,32 @@
  * expression syntax error.
  */
 int main(int argc, char *argv[]) {
-  // BEGIN-STUDENTS-TO-ADD-CODE
-  // END-STUDENTS-TO-ADD-CODE
+  node_t* rootPointer = newLinkedList();
+
+  person_t person1 = {.name = "Doe", .first_name = "John", .age = 43};
+  person_t person2 = {.name = "Alabastatan", .first_name = "Jane", .age = 41};
+  person_t person3 = {.name = "Heinz", .first_name = "Jane", .age = 42};
+  person_t peopleAlphabetic[] = {person2, person3, person1};
+
+  for (int i = 0; i < 5; i++) {
+    list_insert(peopleAlphabetic[i], rootPointer);
+  }
+
+  printf("Please insert the first name of the person you want to remove: \n");
+  char firstName [NAME_LEN];
+  fgets(firstName, NAME_LEN, stdin);
+
+  printf("Please insert the second name of the person you want to remove: \n");
+  char secondName [NAME_LEN];
+  fgets(secondName, NAME_LEN, stdin);
+
+  printf("Please enter the age of the person you want to remove: \n");
+  int age = -1;
+  scanf("%d", &age);
+
+  person_t person = {secondName, firstName, age};
+
+  list_remove(rootPointer, person);
+
   return EXIT_SUCCESS;
 }
