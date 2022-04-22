@@ -10,21 +10,21 @@
 #include <stdio.h>
 #include <string.h>
 
+int searching = 1;
+
 void askForName(){}
 
 void searchForMatch(person_t *personToDelete, node_t *nodePointer, int *searching){
   printf("is in method searchFOrMatch!");
-  node_t *nextNodePointer = nodePointer->next;
   if(strlen(nodePointer->content.name) == 0) {
     printf("No Person found with this name!");
     *searching = 0;
     return;
   }
-  if(person_compare(personToDelete, &nextNodePointer->content) != 0) {
-    nextNodePointer = nextNodePointer->next;
-  } else {
-    nodePointer->next = nextNodePointer->next;
-    free(nextNodePointer);
+  if(person_compare(personToDelete, &nodePointer->content) == 0) {
+    *searching = 0;
+    nodePointer->next = nodePointer->next->next;
+    free(nodePointer);
     printf("Person is deleted!");
     return;
   }
@@ -32,14 +32,16 @@ void searchForMatch(person_t *personToDelete, node_t *nodePointer, int *searchin
 
 void compareNode(person_t personToDelete, node_t *rootPointer){
   printf("is in method compareNode!");
-  node_t *nextNodePointer = rootPointer->next;
+  node_t *currentNode = rootPointer;
 
-  int searching = 1;
+  //int searching = 1;
 
   while (searching == 1){
     printf("is searching in method compareNode!");
 
-    searchForMatch(&personToDelete, nextNodePointer, &searching);
+    currentNode = currentNode->next;
+
+    searchForMatch(&personToDelete, currentNode, &searching);
   }  
 }
 
