@@ -19,6 +19,14 @@
 
 #define MAX_AGE 99
 
+void printList(node_t* head) {
+  node_t* current = head->next;
+  while (strlen(current->content.name)) {
+    printf("%s\n", current->content.name);
+    current = current->next;
+  }
+}
+
 /**
  * @brief Main entry point.
  * @param[in] argc  The size of the argv array.
@@ -58,6 +66,7 @@ int main(int argc, char *argv[]) {
   person.age = age;
 
   list_remove(rootPointer, person);
+  printList(rootPointer);
 
   return EXIT_SUCCESS;
 }

@@ -14,40 +14,36 @@ int searching = 1;
 
 void askForName(){}
 
-void searchForMatch(person_t *personToDelete, node_t *nodePointer, int *searching){
-  printf("is in method searchFOrMatch!");
-  if(strlen(nodePointer->content.name) == 0) {
-    printf("No Person found with this name!");
+node_t* getMatch(person_t *personToDelete, node_t *nodePointer, int *searching){
+  if(strlen(nodePointer->next->content.name) == 0) {
     *searching = 0;
-    return;
+    return NULL;
   }
-  if(person_compare(personToDelete, &nodePointer->content) == 0) {
+
+  if(person_compare(personToDelete, &nodePointer->next->content) == 0) {
     *searching = 0;
-    nodePointer->next = nodePointer->next->next;
-    free(nodePointer);
-    printf("Person is deleted!");
-    return;
+    return nodePointer->next;
   }
-}
-
-void compareNode(person_t personToDelete, node_t *rootPointer){
-  printf("is in method compareNode!");
-  node_t *currentNode = rootPointer;
-
-  //int searching = 1;
-
-  while (searching == 1){
-    printf("is searching in method compareNode!");
-
-    currentNode = currentNode->next;
-
-    searchForMatch(&personToDelete, currentNode, &searching);
-  }  
+  return NULL;
 }
 
 void list_remove(node_t *rootPointer, person_t personToDelete) {
-  printf("is in method list_remove!");
-  compareNode(personToDelete, rootPointer);
+  node_t *currentNode = rootPointer;
+  node_t *foundNode;
+  node_t *previousNode;
+
+  while (searching){
+    previousNode = currentNode;
+    foundNode = getMatch(&personToDelete, currentNode, &searching);
+    currentNode = currentNode->next;
+  }
+  if(foundNode == NULL) {
+    printf("No Person found with this name!\n");
+  } else {
+    previousNode->next = foundNode->next;
+    free(foundNode);
+    printf("Person is deleted!\n");
+  }
 }
 
 node_t *getNewNode(person_t person, node_t *next) {
