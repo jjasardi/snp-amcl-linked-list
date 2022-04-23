@@ -73,10 +73,20 @@ static void test_person_compare(void) {
   person_t person9 = {.name = "NAME", .first_name = "Firstname", .age = 42};
   person_t person10 = {.name = "name", .first_name = "Firstname", .age = 42};
 
+  person_t person11 = {.name = "A", .first_name = "abc", .age = 40};
+  person_t person12 = {.name = "B", .first_name = "def", .age = 42};
+
+  person_t person13 = {.name = "B", .first_name = "abc", .age = 40};
+  person_t person14 = {.name = "A", .first_name = "def", .age = 42};
+
 
   // act
 
   // assert
+
+  // all fields are different, only name is significant
+  CU_ASSERT_TRUE(person_compare(&person11, &person12) < 0 && person_compare(&person12, &person11) > 0);
+  CU_ASSERT_TRUE(person_compare(&person13, &person14) > 0 && person_compare(&person14, &person13) < 0);
 
   // only name is different
   CU_ASSERT_TRUE(person_compare(&person1, &person2) < 0 && person_compare(&person2, &person1) > 0);
