@@ -14,6 +14,15 @@ int searching = 1;
 
 void askForName(){}
 
+/**
+ * @brief Get the Match object
+ * 
+ * @param personToDelete  person to delete
+ * @param nodePointer pointer of the current node
+ * @param searching termination conition for searching
+ * @return node_t*  pointer to the node which contains the person to delete- if exists
+ *                  NULL if person not exists
+ */
 node_t* getMatch(person_t *personToDelete, node_t *nodePointer, int *searching){
   if(strlen(nodePointer->next->content.name) == 0) {
     *searching = 0;
@@ -27,6 +36,12 @@ node_t* getMatch(person_t *personToDelete, node_t *nodePointer, int *searching){
   return NULL;
 }
 
+/**
+ * @brief removes the given person if exists in linked list
+ * 
+ * @param rootPointer pointer of the root node
+ * @param personToDelete  person to delete
+ */
 void list_remove(node_t *rootPointer, person_t personToDelete) {
   node_t *currentNode = rootPointer;
   node_t *foundNode;

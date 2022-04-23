@@ -37,36 +37,24 @@ void printList(node_t* head) {
 int main(int argc, char *argv[]) {
   node_t* rootPointer = newLinkedList();
 
-  person_t person1 = {.name = "Doe", .first_name = "John", .age = 43};
-  person_t person2 = {.name = "Alabastatan", .first_name = "Jane", .age = 41};
-  person_t person3 = {.name = "Heinz", .first_name = "Jane", .age = 42};
-  person_t peopleAlphabetic[] = {person2, person3, person1};
-
-  for (int i = 0; i < 3; i++) {
-    list_insert(peopleAlphabetic[i], rootPointer);
-  }
-
   printf("Please insert the first name of the person you want to remove: \n");
   char firstName [NAME_LEN];
   scanf("%s", firstName);
-  // fgets(firstName, NAME_LEN, stdin);
 
   printf("Please insert the second name of the person you want to remove: \n");
   char secondName [NAME_LEN];
   scanf("%s", secondName);
-  // fgets(secondName, NAME_LEN, stdin);
 
   printf("Please enter the age of the person you want to remove: \n");
   int age = -1;
   scanf("%d+", &age);
 
-  person_t person;
-  strncpy(person.first_name, firstName, NAME_LEN);
-  strncpy(person.name, secondName, NAME_LEN);
-  person.age = age;
+  person_t personToDelete;
+  strncpy(personToDelete.first_name, firstName, NAME_LEN);
+  strncpy(personToDelete.name, secondName, NAME_LEN);
+  personToDelete.age = age;
 
-  list_remove(rootPointer, person);
-  printList(rootPointer);
+  list_remove(rootPointer, personToDelete);
 
   return EXIT_SUCCESS;
 }

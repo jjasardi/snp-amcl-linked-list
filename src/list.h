@@ -15,9 +15,7 @@ node_t *getNewNode(person_t person, node_t *next);
 
 node_t *newLinkedList();
 
-void searchForMatch(person_t *person, node_t *nodePointer, int *searching);
-
-void compareNode(person_t person, node_t *rootPointer);
+node_t* getMatch(person_t *personToDelete, node_t *nodePointer, int *searching);
 
 void list_remove(node_t *rootPointer, person_t personToDelete);
 
