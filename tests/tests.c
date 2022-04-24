@@ -56,12 +56,55 @@ static int teardown(void) {
 // tests
 static void test_person_compare(void) {
   // BEGIN-STUDENTS-TO-ADD-CODE
+
   // arrange
+  person_t person1 = {.name = "A", .first_name = "Firstname", .age = 42};
+  person_t person2 = {.name = "B", .first_name = "Firstname", .age = 42};
+
+  person_t person3 = {.name = "Name", .first_name = "A", .age = 42};
+  person_t person4 = {.name = "Name", .first_name = "B", .age = 42};
+
+  person_t person5 = {.name = "Name", .first_name = "Firstname", .age = 42};
+  person_t person6 = {.name = "Name", .first_name = "Firstname", .age = 43};
+
+  person_t person7 = {.name = "Name", .first_name = "Firstname", .age = 42};
+  person_t person8 = {.name = "Name", .first_name = "Firstname", .age = 42};
+
+  person_t person9 = {.name = "NAME", .first_name = "Firstname", .age = 42};
+  person_t person10 = {.name = "name", .first_name = "Firstname", .age = 42};
+
+  person_t person11 = {.name = "A", .first_name = "abc", .age = 40};
+  person_t person12 = {.name = "B", .first_name = "def", .age = 42};
+
+  person_t person13 = {.name = "B", .first_name = "abc", .age = 40};
+  person_t person14 = {.name = "A", .first_name = "def", .age = 42};
+
 
   // act
-  CU_FAIL("missing test");
 
   // assert
+
+  // all fields are different, only name is significant
+  CU_ASSERT_TRUE(person_compare(&person11, &person12) < 0 && person_compare(&person12, &person11) > 0);
+  CU_ASSERT_TRUE(person_compare(&person13, &person14) > 0 && person_compare(&person14, &person13) < 0);
+
+  // only name is different
+  CU_ASSERT_TRUE(person_compare(&person1, &person2) < 0 && person_compare(&person2, &person1) > 0);
+
+  // only first name is different
+  CU_ASSERT_TRUE(person_compare(&person3, &person4) < 0 && person_compare(&person4, &person3) > 0);
+
+  // only age is different
+  CU_ASSERT_TRUE(person_compare(&person5, &person6) < 0 && person_compare(&person6, &person5) > 0);
+
+  // all fields are the same (different objects)
+  CU_ASSERT_TRUE(person_compare(&person7, &person8) == 0 && person_compare(&person8, &person7) == 0);
+
+  // same object
+  CU_ASSERT_TRUE(person_compare(&person8, &person8) == 0 && person_compare(&person8, &person8) == 0);
+
+  // compare uppercase and lowercase letters
+  CU_ASSERT_TRUE(person_compare(&person9, &person10) < 0 &&  person_compare(&person10, &person9) > 0);
 
   // END-STUDENTS-TO-ADD-CODE
 }
