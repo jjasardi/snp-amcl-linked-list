@@ -12,8 +12,6 @@
 
 int searching = 1;
 
-void askForName(){}
-
 /**
  * @brief Get the Match object
  * 

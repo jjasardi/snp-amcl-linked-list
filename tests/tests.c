@@ -135,22 +135,25 @@ static void test_list_remove(void) {
   person_t person1 = {.name = "Doe", .first_name = "John", .age = 43};
   person_t person2 = {.name = "Alabastatan", .first_name = "Jane", .age = 41};
   person_t personToDelete = {.name = "Heinz", .first_name = "Jane", .age = 42};
-  person_t peopleAlphabetic[] = {person2, personToDelete, person1};
+  person_t peopleAlphabetic[] = {person2, person1, personToDelete};
   node_t* rootPointer = newLinkedList();
   
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 3; i++) {
     list_insert(peopleAlphabetic[i], rootPointer);
   }
-
-  person_t personRemoved [] = {person2, person1};
 
   // act
   list_remove(rootPointer, personToDelete); 
 
   // assert
-  CU_ASSERT_EQUAL(&peopleAlphabetic[0], &personRemoved[0]);
+  CU_ASSERT_EQUAL(peopleAlphabetic[0].age, rootPointer->next->content.age);
+  CU_ASSERT_NSTRING_EQUAL(peopleAlphabetic[0].first_name, rootPointer->next->content.first_name, 4);
+  CU_ASSERT_NSTRING_EQUAL(peopleAlphabetic[0].name, rootPointer->next->content.name, 11);
 
-  CU_ASSERT_EQUAL(&peopleAlphabetic[1], &personRemoved[1]);
+  CU_ASSERT_EQUAL(peopleAlphabetic[1].age, rootPointer->next->next->content.age);
+  CU_ASSERT_NSTRING_EQUAL(peopleAlphabetic[1].first_name, rootPointer->next->next->content.first_name, 4);
+  CU_ASSERT_NSTRING_EQUAL(peopleAlphabetic[1].name, rootPointer->next->next->content.name, 3);
+
   // END-STUDENTS-TO-ADD-CODE
 }
 

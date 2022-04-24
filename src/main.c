@@ -35,26 +35,5 @@ void printList(node_t* head) {
  * expression syntax error.
  */
 int main(int argc, char *argv[]) {
-  node_t* rootPointer = newLinkedList();
-
-  printf("Please insert the first name of the person you want to remove: \n");
-  char firstName [NAME_LEN];
-  scanf("%s", firstName);
-
-  printf("Please insert the second name of the person you want to remove: \n");
-  char secondName [NAME_LEN];
-  scanf("%s", secondName);
-
-  printf("Please enter the age of the person you want to remove: \n");
-  int age = -1;
-  scanf("%d+", &age);
-
-  person_t personToDelete;
-  strncpy(personToDelete.first_name, firstName, NAME_LEN);
-  strncpy(personToDelete.name, secondName, NAME_LEN);
-  personToDelete.age = age;
-
-  list_remove(rootPointer, personToDelete);
-
   return EXIT_SUCCESS;
 }
