@@ -144,12 +144,19 @@ static void test_list_remove(void) {
 static void test_list_clear(void) {
   // BEGIN-STUDENTS-TO-ADD-CODE
   // arrange
-
-  // act
-  CU_FAIL("missing test");
+  node_t *rootPointer = newLinkedList();
+  person_t person = {.name = "Doe", .first_name = "John", .age = 43};
+  person_t person2 = {.name = "Alabastatan", .first_name = "Jane", .age = 41};
+  person_t person3 = {.name = "Heinz", .first_name = "Jane", .age = 42};
+  person_t person4 = {.name = "Alban", .first_name = "Jane", .age = 41};
+  person_t people[] = {person, person2, person3, person4};
+  for (int i = 0; i < 4; i++) {
+    list_insert(people[i], rootPointer);
+  }
+  list_clear(rootPointer);
 
   // assert
-
+  CU_ASSERT_EQUAL(rootPointer->next, rootPointer);
   // END-STUDENTS-TO-ADD-CODE
 }
 
