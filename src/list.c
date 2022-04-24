@@ -61,4 +61,5 @@ void list_clear(node_t *root) {
     free(current);
     current = temp;
   }
+  root->next = root;
 }
