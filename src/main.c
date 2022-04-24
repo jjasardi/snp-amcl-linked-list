@@ -17,6 +17,16 @@
 
 #include "list.h"
 
+#define MAX_AGE 99
+
+void printList(node_t* head) {
+  node_t* current = head->next;
+  while (strlen(current->content.name)) {
+    printf("%s\n", current->content.name);
+    current = current->next;
+  }
+}
+
 /**
  * @brief Main entry point.
  * @param[in] argc  The size of the argv array.
@@ -25,7 +35,5 @@
  * expression syntax error.
  */
 int main(int argc, char *argv[]) {
-  // BEGIN-STUDENTS-TO-ADD-CODE
-  // END-STUDENTS-TO-ADD-CODE
   return EXIT_SUCCESS;
 }

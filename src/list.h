@@ -15,7 +15,11 @@ node_t *getNewNode(person_t person, node_t *next);
 
 node_t *newLinkedList();
 
-// list_remove()
+person_t* askForName();
+
+void list_remove(node_t *rootPointer, person_t personToDelete);
+
+
 // list_clear()
 
 void list_clear(node_t *root);
