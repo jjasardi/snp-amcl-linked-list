@@ -34,32 +34,6 @@ void printNode(node_t* node) {
   printf("},\n");
 }
 
-void printList(node_t* head) {
-  node_t* current = head->next;
-  while (strlen(current->content.name)) {
-    printNode(current);
-    current = current->next;
-  }
-}
-
-void printCommands(void) {
-  printf("\n");
-  printf("%d. Insert\n", INSERT);
-  printf("%d. Remove\n", REMOVE);
-  printf("%d. Clear\n", CLEAR);
-  printf("%d. Quit\n", QUIT);
-  printf("\n");
-}
-
-void getPersonData(person_t* person) {
-  printf("Name: ");
-  scanf("%s", person->name);
-  printf("First name: ");
-  scanf("%s", person->first_name);
-  printf("Age: ");
-  scanf("%d", &person->age);
-}
-
 void validateReturnCode(return_codes_t code, char successMessage[]) {
   switch (code) {
     case SUCCESS:
@@ -81,6 +55,15 @@ void validateReturnCode(return_codes_t code, char successMessage[]) {
     default:
       break;
   }
+}
+
+void getPersonData(person_t* person) {
+  printf("Name: ");
+  scanf("%s", person->name);
+  printf("First name: ");
+  scanf("%s", person->first_name);
+  printf("Age: ");
+  scanf("%d", &person->age);
 }
 
 void executeCommand(commands_t command, node_t* head) {
@@ -106,6 +89,23 @@ void executeCommand(commands_t command, node_t* head) {
 
     default:
       fprintf(stderr, "Unknown command\n");
+  }
+}
+
+void printCommands(void) {
+  printf("\n");
+  printf("%d. Insert\n", INSERT);
+  printf("%d. Remove\n", REMOVE);
+  printf("%d. Clear\n", CLEAR);
+  printf("%d. Quit\n", QUIT);
+  printf("\n");
+}
+
+void printList(node_t* head) {
+  node_t* current = head->next;
+  while (strlen(current->content.name)) {
+    printNode(current);
+    current = current->next;
   }
 }
 
