@@ -29,8 +29,6 @@ node_t *getNewNode(person_t person, node_t *next);
 
 node_t *newLinkedList();
 
-person_t *askForName();
-
 return_codes_t list_remove(node_t *rootPointer, person_t personToDelete);
 
 // list_clear()
