@@ -57,11 +57,23 @@ void validateReturnCode(return_codes_t code, char successMessage[]) {
   }
 }
 
+void getNameInput(char name[NAME_LEN]) {
+  char currentChar;
+  int index = 0;
+  while ((currentChar = getchar()) != '\n') {
+    if (index < NAME_LEN - 1) {
+      name[index] = currentChar;
+      index++;
+    }
+  }
+  name[index] = '\0';
+}
+
 void getPersonData(person_t* person) {
   printf("Name: ");
-  scanf("%s", person->name);
+  getNameInput(person->name);
   printf("First name: ");
-  scanf("%s", person->first_name);
+  getNameInput(person->first_name);
   printf("Age: ");
   scanf("%d", &person->age);
 }
@@ -124,7 +136,10 @@ int main(int argc, char* argv[]) {
     printList(head);
     printCommands();
     printf("Enter command: ");
-    scanf("%d", &inputCommand);
+    char inputChar = getchar();
+    while (getchar() != '\n')
+      ;
+    inputCommand = atoi(&inputChar);
     executeCommand(inputCommand, head);
   } while (inputCommand != QUIT);
 
